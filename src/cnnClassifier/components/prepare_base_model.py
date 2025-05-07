@@ -30,9 +30,8 @@ class PrepareBaseModel:
         prediction = tf.keras.layers.Dense(units=classes, activation='softmax')(flatten_in)
 
         full_model = tf.keras.models.Model(inputs=model.input, outputs=prediction)
-
         full_model.compile(
-            optimizer=tf.keras.optimizers.SGD(learning_rate=learning_rate),
+            optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
             loss=tf.keras.losses.CategoricalCrossentropy(),
             metrics=["accuracy"]
         )
