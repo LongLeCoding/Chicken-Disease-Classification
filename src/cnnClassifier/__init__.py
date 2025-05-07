@@ -2,8 +2,9 @@ import os
 import sys
 import logging
 
-# Fix lỗi Unicode khi in ra console Windows
-sys.stdout.reconfigure(encoding='utf-8')
+# Sửa lỗi Unicode khi chạy trên terminal Windows
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
 
@@ -15,7 +16,7 @@ logging.basicConfig(
     level=logging.INFO,
     format=logging_str,
     handlers=[
-        logging.FileHandler(log_filepath, encoding='utf-8'),  # Ghi file cũng bằng UTF-8
+        logging.FileHandler(log_filepath, encoding='utf-8'),
         logging.StreamHandler(sys.stdout)
     ]
 )
